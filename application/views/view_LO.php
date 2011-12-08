@@ -1,0 +1,1 @@
+<input id="size" type="input" value="logout" onclick="doLogout()">
