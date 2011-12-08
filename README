@@ -1,0 +1,21 @@
+-Form Registrasi
+http://localhost:8989/prak_UKM/
+
+
+-Form Login
+http://localhost:8989/prak_UKM/index.php/utama/login
+
+Aplikasi ini untuk simulasi pendaftaran UKM,
+syarat :
+1. Setiap user yang berhasil login diperbolehkan membuat UKM
+2. Setiap user yang membuat UKM diperbolehkan memberikan update di data UKMnya
+3. Setiap user dapat mendaftar di UKM lain
+4. UKM yang tidak memiliki anggota dapat dihapus oleh pembuat UKM
+5. Tidak dapat keluar secara administrasi dari UKM
+
+AJAX APPS
+CI - HTML 5 - CSS3
+
+Note : Harap Mengganti port apache Bapak dari port:80 menjadi port:8989
+
+nama database : prak_ukm
