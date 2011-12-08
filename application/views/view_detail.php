@@ -23,8 +23,8 @@
 				<?php }?>
 			</td>
 			<td>
-				<?php if ($adaIsi==false){?>
-				<input type='button' value="DELETE" onclick="DeleteIt(<?php if(isset($idUKM)){echo $idUKM;}  ?>)">
+				<?php if ($adaIsi==false && $permission==TRUE){?>
+				<input type='button' value="DELETE" onclick="DeleteIt('<?php echo $id_ukm; ?>')">
 				<?php }?>
 			</td>
 	</tr>

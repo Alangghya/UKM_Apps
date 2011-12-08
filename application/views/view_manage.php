@@ -49,7 +49,7 @@
 				data['id']=e;			
 				$.post(bu+'editPenjelasan',data,function(xxx){
 					$('#penjelasan').html(xxx);				
-				})
+				});
 			}
 			
 			function EditIt(e){
@@ -66,7 +66,8 @@
 			
 			function DetailIt(e){
 				var data={};	
-				data['id']=e;			
+				data['id']=e;
+				data['id_ukm']=$('#hide_UKM').val();			
 				$.post(bu+'detailPeserta',data,function(xxx){
 					$('#detail_penjelasan').html(xxx);				
 				})
@@ -87,12 +88,28 @@
 				})
 			}
 			
-			function DeleteIt(){
-				
+			function DeleteIt(e){
+				var data={}
+				data['idUKM']=e;			
+				$.post(bu+'deleteUKM',data,function(xxx){
+					//$('#penjelasan').html(xxx);		
+					alert('UKM telah hilang');
+					document.location="http://localhost:8989/prak_UKM/index.php/utama/manage";		
+				})
 			}
 			
 			function register_me(e){
 				//alert(e);
+				var data={};
+				
+				
+				data['ID_UKM']=$('#hide_UKM').val();
+				data['ID_Peserta']=<?php echo $this->session->userdata('id'); ?>;
+				
+				$.post(bu+'registerPeserta',data,function(x){
+					$('#detail_penjelasan').html(x);
+				});
+				
 			}
 			
 			 $(document).ready(function(){

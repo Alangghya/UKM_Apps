@@ -101,12 +101,17 @@ class Utama extends CI_Controller {
 	public function editPenjelasan(){
 		
 		$id=$this->input->post('id');
+				
 		$data['rows']=$this->utama_model->dataUKMperID($id);
+		$data['id_ukm']=$id;
+				
+		
 		$this->load->view('view_penjelasan',$data);
 	}
 	
 	public function updateNamaUKM(){
 		$id=$this->input->post('id');
+		
 		$isi=$this->input->post('isi');
 		
 		$this->utama_model->updateNamaUKM($id,$isi);
@@ -117,7 +122,17 @@ class Utama extends CI_Controller {
 	
 	public function detailPeserta(){
 		$id=$this->input->post('id');
+		
+		$mn=strtolower($this->session->userdata('Nama'));
+		
+		if($this->utama_model->creatorUKM($id,$mn)==TRUE){
+			$data['permission']=TRUE;
+		}else{
+			$data['permission']=FALSE;
+		}	
+		
 		$data['fg']=$this->utama_model->daftarPesertaPerUKM($id);
+		$data['id_ukm']=$this->input->post('id_ukm');
 		
 		$this->load->view('view_detail',$data);
 	}
@@ -136,9 +151,26 @@ class Utama extends CI_Controller {
 		$this->load->view('view_mydetail',$data);
 		 		
 	}
+
+	public function registerPeserta(){
+		$a['ID_UKM'] = $this->input->post('ID_UKM');
+		$a['ID_Siswa_Ikut']= $this->input->post('ID_Peserta');
+		$a['Tanggal_Registrasi']=date('Y-m-d H:i:s');
+		$a['Tanggal_Selesai']="";
+		
+		$this->load->model('utama_model');
+		$this->utama_model->registrasi_member_UKM($a);
+	}
 	
 	public function test(){
 		//echo "weleh-weleh";
+	}
+	
+	public function deleteUKM(){
+		
+		$z=$this->input->post('idUKM');
+		$this->db->where('ID_UKM',$z);
+		$this->db->delete('ukm');
 	}
 	
 }

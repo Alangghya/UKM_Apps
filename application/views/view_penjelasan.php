@@ -6,7 +6,7 @@
 			<?php foreach ($rows as $r){?>
 	<tr>
 				<td><input id="t_NamaUKM" type="text" value="<?php echo $r->NamaUKM?>"></td>
-				<td><?php echo $r->Nama?></td>
+				<td id="l_namaPembuat"><?php echo $r->Nama?></td>
 	</tr>
 	<?php }?>
 	<tr>
@@ -18,6 +18,7 @@
 				<input type='button' value="EDIT" onclick="EditIt(<?php echo $r->ID_UKM?>)">
 				<?php } ?>
 			</td>
+			<input type='hidden' id='hide_UKM' value="<?php echo $id_ukm?>"/>
 			
 	</tr>
 </table>

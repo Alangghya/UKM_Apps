@@ -52,6 +52,41 @@
 		return $query->result();
 	}
 	
+	public function creatorUKM($id,$penj){
+		$this->db->where('ID_UKM',$id);
+		$h=$this->db->get('ukm');
+		$h=$h->result();
+		
+		foreach ($h as $key) {
+			$id_pembuat = $key->ID_Siswa_Pembuat;
+		}
+		
+		$this->db->where('ID_Siswa_Pembuat',$id_pembuat);
+		$hh=$this->db->get('siswa');
+		$hh=$hh->result();
+		
+		foreach ($hh as $key) {
+			$nama = $key->Nama;
+		}
+		
+		if ($nama==$penj){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+		
+	}
+	
+	public function id_siswa($nama){
+		$this->db->where('NAMA',$nama);
+		$r=$this->db->get('siswa');
+		$r=$r->result();
+		
+		foreach ($r as $key ) {
+			return $key->ID_Siswa_Pembuat;
+		}
+	}
+	
 	public function daftarPesertaPerUKM($idUKM){
 		$sql="select detail_siswa.ID_UKM as IDUKM,siswa.ID_Siswa_Pembuat as ID, Nama, Tanggal_Registrasi as TglRegis From siswa,detail_siswa where detail_siswa.ID_UKM=$idUKM and detail_siswa.ID_siswa_ikut=siswa.ID_Siswa_Pembuat";
 		$q=$this->db->query($sql); 
@@ -83,12 +118,8 @@
 	}
 	
 	public function registrasi_member_UKM($f){
-		$a['ID_UKM'] = $f['ID_UKM'];
-		$a['ID_Siswa_Ikut']=$f['ID_Peserta'];
-		$a['Tanggal_Registrasi']=date('Y-m-d H:i:s');
-		$a['Tanggal_Selesai']="";
-		
-		$this->db->insert('detail_siswa',$a);
+				
+		$this->db->insert('detail_siswa',$f);
 	}
 	
    }
